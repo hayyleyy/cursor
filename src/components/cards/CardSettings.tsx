@@ -4,12 +4,7 @@ const SettingsContainer = styled.div`
   background: white;
   border-radius: 20px;
   padding: 1.5rem;
-`;
-
-const Title = styled.h2`
-  font-size: 1.25rem;
-  color: #2B3674;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 `;
 
 const SettingsList = styled.div`
@@ -74,7 +69,6 @@ const CardSettings = () => {
 
   return (
     <SettingsContainer>
-      <Title>Card Setting</Title>
       <SettingsList>
         {settings.map((setting, index) => (
           <SettingItem key={index}>

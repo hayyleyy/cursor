@@ -1,27 +1,24 @@
 import styled from 'styled-components';
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 
 const StatisticsContainer = styled.div`
   background: white;
   border-radius: 20px;
   padding: 1.5rem;
   margin-bottom: 2rem;
-`;
-
-const Title = styled.h2`
-  font-size: 1.25rem;
-  color: #2B3674;
-  margin-bottom: 1.5rem;
+  max-width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ChartContainer = styled.div`
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1;
-  max-width: 300px;
+  flex: 1;
   margin: 0 auto;
+  width: 100%;
 `;
 
-const Legend = styled.div`
+const CustomLegend = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
@@ -44,30 +41,62 @@ const LegendDot = styled.div<{ color: string }>`
 `;
 
 const CardStatistics = () => {
+  const data = [
+    { name: 'DBL Bank', value: 35, color: '#4318FF' },
+    { name: 'BRC Bank', value: 25, color: '#6C72FF' },
+    { name: 'ABM Bank', value: 20, color: '#05CD99' },
+    { name: 'MCP Bank', value: 20, color: '#FFB547' }
+  ];
+
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? 'start' : 'end'}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
+
   return (
     <StatisticsContainer>
-      <Title>Card Expense Statistics</Title>
       <ChartContainer>
-        {/* 여기에 도넛 차트 구현 (recharts 또는 다른 차트 라이브러리 사용 권장) */}
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              outerRadius={100}
+              innerRadius={60}
+              dataKey="value"
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
       </ChartContainer>
-      <Legend>
-        <LegendItem>
-          <LegendDot color="#4318FF" />
-          DBL Bank
-        </LegendItem>
-        <LegendItem>
-          <LegendDot color="#6C72FF" />
-          BRC Bank
-        </LegendItem>
-        <LegendItem>
-          <LegendDot color="#05CD99" />
-          ABM Bank
-        </LegendItem>
-        <LegendItem>
-          <LegendDot color="#FFB547" />
-          MCP Bank
-        </LegendItem>
-      </Legend>
+      <CustomLegend>
+        {data.map((item, index) => (
+          <LegendItem key={`legend-${index}`}>
+            <LegendDot color={item.color} />
+            {item.name}
+          </LegendItem>
+        ))}
+      </CustomLegend>
     </StatisticsContainer>
   );
 };

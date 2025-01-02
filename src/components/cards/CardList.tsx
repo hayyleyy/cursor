@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { FiCreditCard } from 'react-icons/fi';
+import styled from "styled-components";
+import { FiCreditCard } from "react-icons/fi";
 
 interface CardListItem {
   id: string;
@@ -10,16 +10,12 @@ interface CardListItem {
 }
 
 const ListContainer = styled.div`
-  background: white;
   border-radius: 20px;
   padding: 1.5rem;
   margin-bottom: 2rem;
-`;
-
-const Title = styled.h2`
-  font-size: 1.25rem;
-  color: #2B3674;
-  margin-bottom: 1.5rem;
+  height: 400px;
+  overflow-y: auto;
+  width: 100%;
 `;
 
 const List = styled.div`
@@ -30,132 +26,132 @@ const List = styled.div`
 
 const ListItem = styled.div`
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 10px;
-  transition: background-color 0.2s;
-  
-  &:hover {
-    background-color: #F4F7FE;
-  }
+  grid-template-columns: 60px 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 `;
 
 const IconWrapper = styled.div<{ color: string }>`
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background-color: ${({ color }) => color};
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background-color: ${({ color }) => `${color}15`};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: ${({ color }) => color};
 `;
 
-const CardInfo = styled.div`
+const CardContent = styled.div`
   display: grid;
+  grid-template-columns: 1.2fr 1fr 1.5fr 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+`;
+
+const ContentItem = styled.div`
+  display: flex;
+  flex-direction: column;
   gap: 0.25rem;
+  min-width: 0;
+  overflow: hidden;
 `;
 
-const CardType = styled.div`
-  color: #A3AED0;
+const Label = styled.div`
+  color: #2b3674;
+  font-weight: 600;
   font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
-const BankName = styled.div`
-  color: #2B3674;
-  font-weight: 500;
-`;
-
-const CardDetails = styled.div`
-  display: grid;
-  gap: 0.25rem;
-  text-align: right;
-`;
-
-const CardNumber = styled.div`
-  color: #2B3674;
-  font-weight: 500;
-`;
-
-const CardHolder = styled.div`
-  color: #A3AED0;
+const Value = styled.div`
+  color: #a3aed0;
   font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const ViewButton = styled.button`
   background: none;
   border: none;
-  color: #4318FF;
+  color: #4318ff;
   font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
-  padding: 0.5rem;
-  
-  &:hover {
-    text-decoration: underline;
-  }
+  white-space: nowrap;
+  padding-left: 1rem;
+  flex-shrink: 0;
 `;
 
 const CardList = () => {
   const cards: CardListItem[] = [
     {
-      id: '1',
-      cardType: 'Secondary',
-      bank: 'DBL Bank',
-      cardNumber: '**** **** 5600',
-      cardHolder: 'William',
+      id: "1",
+      cardType: "Secondary",
+      bank: "DBL Bank",
+      cardNumber: "**** **** 5600",
+      cardHolder: "William",
     },
     {
-      id: '2',
-      cardType: 'Secondary',
-      bank: 'BRC Bank',
-      cardNumber: '**** **** 4300',
-      cardHolder: 'Michel',
+      id: "2",
+      cardType: "Secondary",
+      bank: "BRC Bank",
+      cardNumber: "**** **** 4300",
+      cardHolder: "Michel",
     },
     {
-      id: '3',
-      cardType: 'Secondary',
-      bank: 'ABM Bank',
-      cardNumber: '**** **** 7560',
-      cardHolder: 'Edward',
+      id: "3",
+      cardType: "Secondary",
+      bank: "ABM Bank",
+      cardNumber: "**** **** 7560",
+      cardHolder: "Edward",
     },
   ];
 
   const getBankColor = (bank: string) => {
     const colors = {
-      'DBL Bank': '#4318FF',
-      'BRC Bank': '#6C72FF',
-      'ABM Bank': '#05CD99',
-      'MCP Bank': '#FFB547',
+      "DBL Bank": "#4318FF",
+      "BRC Bank": "#6C72FF",
+      "ABM Bank": "#05CD99",
+      "MCP Bank": "#FFB547",
     };
-    return colors[bank as keyof typeof colors] || '#4318FF';
-  };
-
-  const handleViewDetails = (id: string) => {
-    console.log('View details for card:', id);
+    return colors[bank as keyof typeof colors] || "#4318FF";
   };
 
   return (
     <ListContainer>
-      <Title>Card List</Title>
       <List>
         {cards.map((card) => (
           <ListItem key={card.id}>
             <IconWrapper color={getBankColor(card.bank)}>
-              <FiCreditCard size={20} />
+              <FiCreditCard size={24} />
             </IconWrapper>
-            <CardInfo>
-              <CardType>{card.cardType}</CardType>
-              <BankName>{card.bank}</BankName>
-            </CardInfo>
-            <CardDetails>
-              <CardNumber>{card.cardNumber}</CardNumber>
-              <CardHolder>{card.cardHolder}</CardHolder>
-            </CardDetails>
-            <ViewButton onClick={() => handleViewDetails(card.id)}>
-              View Details
-            </ViewButton>
+            <CardContent>
+              <ContentItem>
+                <Label>Card Type</Label>
+                <Value>{card.cardType}</Value>
+              </ContentItem>
+              <ContentItem>
+                <Label>Bank</Label>
+                <Value>{card.bank}</Value>
+              </ContentItem>
+              <ContentItem>
+                <Label>Card Number</Label>
+                <Value>{card.cardNumber}</Value>
+              </ContentItem>
+              <ContentItem>
+                <Label>Namain Card</Label>
+                <Value>{card.cardHolder}</Value>
+              </ContentItem>
+              <ViewButton>View Details</ViewButton>
+            </CardContent>
           </ListItem>
         ))}
       </List>
@@ -163,4 +159,4 @@ const CardList = () => {
   );
 };
 
-export default CardList; 
+export default CardList;

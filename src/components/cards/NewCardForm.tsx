@@ -5,12 +5,7 @@ const FormContainer = styled.div`
   background: white;
   border-radius: 20px;
   padding: 1.5rem;
-`;
-
-const Title = styled.h2`
-  font-size: 1.25rem;
-  color: #2B3674;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 `;
 
 const Description = styled.p`
@@ -100,13 +95,6 @@ const NewCardForm = () => {
 
   return (
     <FormContainer>
-      <Title>Add New Card</Title>
-      <Description>
-        Credit Card generally means a plastic card issued by Scheduled Commercial Banks
-        assigned to a Cardholder, with a credit limit, that can be used to purchase goods
-        and services on credit or obtain cash advances.
-      </Description>
-      
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label>Card Type</Label>
