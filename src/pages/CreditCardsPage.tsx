@@ -13,7 +13,6 @@ const SectionTitle = styled.h2`
   font-weight: 700;
   margin-bottom: 1.5rem;
   text-align: left;
-  padding-left: 0.5rem;
 `;
 
 const PageContainer = styled.div`
@@ -23,8 +22,10 @@ const PageContainer = styled.div`
 
 const MainContent = styled.div`
   flex: 1;
-  padding: 2rem;
+  padding: 2rem 3rem;
   background-color: #f8f9fd;
+  max-width: 1600px;
+  margin: 0 auto;
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -35,7 +36,6 @@ const CardsGrid = styled.div`
   display: flex;
   gap: 1.5rem;
   margin-bottom: 2rem;
-  padding: 0.5rem;
   min-width: min-content;
 
   > * {
@@ -43,10 +43,12 @@ const CardsGrid = styled.div`
   }
 `;
 
-const ContentGrid = styled.div`
+const TopSection = styled.div`
   display: grid;
+  height: 390px;
   grid-template-columns: 400px 1fr;
   gap: 2rem;
+  margin-bottom: 2rem;
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
@@ -54,12 +56,27 @@ const ContentGrid = styled.div`
 `;
 
 const StatisticsSection = styled.div`
-  width: 100%;
+  width: 350px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const ListSection = styled.div`
-  width: 100%;
+  width: 730px;
   min-width: 0;
+  height: 380px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 const FormSection = styled.div`
@@ -80,6 +97,16 @@ const Section = styled.section`
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
+`;
+
+const ContentGrid = styled.div`
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const CreditCardsPage = () => {
@@ -114,7 +141,7 @@ const CreditCardsPage = () => {
             />
           </CardsGrid>
         </Section>
-        <ContentGrid>
+        <TopSection>
           <StatisticsSection>
             <SectionTitle>Card Expense Statistics</SectionTitle>
             <CardStatistics />
@@ -123,6 +150,8 @@ const CreditCardsPage = () => {
             <SectionTitle>Card List</SectionTitle>
             <CardList />
           </ListSection>
+        </TopSection>
+        <ContentGrid>
           <FormSection>
             <SectionTitle>Add New Card</SectionTitle>
             <NewCardForm />

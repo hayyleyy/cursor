@@ -11,9 +11,9 @@ interface CardListItem {
 
 const ListContainer = styled.div`
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 10px;
   margin-bottom: 2rem;
-  height: 400px;
+  height: 380px;
   overflow-y: auto;
   width: 100%;
 `;
@@ -27,7 +27,7 @@ const List = styled.div`
 const ListItem = styled.div`
   display: grid;
   grid-template-columns: 60px 1fr;
-  gap: 1.5rem;
+  gap: 20px;
   padding: 1.5rem;
   border-radius: 16px;
   background: #ffffff;
