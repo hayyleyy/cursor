@@ -20,11 +20,21 @@ const PageContainer = styled.div`
   min-height: 100vh;
 `;
 
-const MainContent = styled.div`
+const MainContainer = styled.div`
   flex: 1;
-  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ContentWrapper = styled.div`
+  flex: 1;
   background-color: #f8f9fd;
+`;
+
+const MainContent = styled.div`
+  padding: 2rem 3rem;
   max-width: 1600px;
+  width: 100%;
   margin: 0 auto;
 
   @media (max-width: 768px) {
@@ -113,55 +123,59 @@ const CreditCardsPage = () => {
   return (
     <PageContainer>
       <Sidebar />
-      <MainContent>
+      <MainContainer>
         <Header title="Credit Cards" />
-        <Section>
-          <SectionTitle>My Cards</SectionTitle>
-          <CardsGrid>
-            <CreditCard
-              balance={5756}
-              cardHolder="Eddy Cusuma"
-              cardNumber="3778 **** **** 1234"
-              validThru="12/22"
-              variant="primary"
-            />
-            <CreditCard
-              balance={5756}
-              cardHolder="Eddy Cusuma"
-              cardNumber="3778 **** **** 1234"
-              validThru="12/22"
-              variant="secondary"
-            />
-            <CreditCard
-              balance={5756}
-              cardHolder="Eddy Cusuma"
-              cardNumber="3778 **** **** 1234"
-              validThru="12/22"
-              variant="white"
-            />
-          </CardsGrid>
-        </Section>
-        <TopSection>
-          <StatisticsSection>
-            <SectionTitle>Card Expense Statistics</SectionTitle>
-            <CardStatistics />
-          </StatisticsSection>
-          <ListSection>
-            <SectionTitle>Card List</SectionTitle>
-            <CardList />
-          </ListSection>
-        </TopSection>
-        <ContentGrid>
-          <FormSection>
-            <SectionTitle>Add New Card</SectionTitle>
-            <NewCardForm />
-          </FormSection>
-          <SettingsSection>
-            <SectionTitle>Card Settings</SectionTitle>
-            <CardSettings />
-          </SettingsSection>
-        </ContentGrid>
-      </MainContent>
+        <ContentWrapper>
+          <MainContent>
+            <Section>
+              <SectionTitle>My Cards</SectionTitle>
+              <CardsGrid>
+                <CreditCard
+                  balance={5756}
+                  cardHolder="Eddy Cusuma"
+                  cardNumber="3778 **** **** 1234"
+                  validThru="12/22"
+                  variant="primary"
+                />
+                <CreditCard
+                  balance={5756}
+                  cardHolder="Eddy Cusuma"
+                  cardNumber="3778 **** **** 1234"
+                  validThru="12/22"
+                  variant="secondary"
+                />
+                <CreditCard
+                  balance={5756}
+                  cardHolder="Eddy Cusuma"
+                  cardNumber="3778 **** **** 1234"
+                  validThru="12/22"
+                  variant="white"
+                />
+              </CardsGrid>
+            </Section>
+            <TopSection>
+              <StatisticsSection>
+                <SectionTitle>Card Expense Statistics</SectionTitle>
+                <CardStatistics />
+              </StatisticsSection>
+              <ListSection>
+                <SectionTitle>Card List</SectionTitle>
+                <CardList />
+              </ListSection>
+            </TopSection>
+            <ContentGrid>
+              <FormSection>
+                <SectionTitle>Add New Card</SectionTitle>
+                <NewCardForm />
+              </FormSection>
+              <SettingsSection>
+                <SectionTitle>Card Settings</SectionTitle>
+                <CardSettings />
+              </SettingsSection>
+            </ContentGrid>
+          </MainContent>
+        </ContentWrapper>
+      </MainContainer>
     </PageContainer>
   );
 };
